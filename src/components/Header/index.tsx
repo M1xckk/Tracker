@@ -1,15 +1,29 @@
 import styles from "./header.module.css";
 import { AiOutlinePlusCircle } from "react-icons/ai";
-import { uppercase } from "../../helpers/stringHelpers";
+import { useState } from "react";
 
-export function Header() {
+export function Header({ addAssignment }: { addAssignment: (title: string) => void }) {
+  const [assignmentTitle, setAssignmentTitle] = useState("");
+
+  const handleCreateAssignment = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (assignmentTitle.trim() !== "") {
+      addAssignment(assignmentTitle);
+      setAssignmentTitle(""); 
+    }
+  };
+
   return (
     <header className={styles.header}>
-      {/* This is simply to show you how to use helper functions */}
-      <h1>{uppercase("bcit")} Assignment Tracker</h1>
-      <form className={styles.newAssignmentForm}>
-        <input placeholder="Add a new assignment" type="text" />
-        <button>
+      <h1>BCIT Assignment Tracker</h1>
+      <form className={styles.newAssignmentForm} onSubmit={handleCreateAssignment}>
+        <input
+          value={assignmentTitle}
+          onChange={(e) => setAssignmentTitle(e.target.value)}
+          placeholder="Add a new assignment"
+          type="text"
+        />
+        <button type="submit" disabled={assignmentTitle.trim() === ""}>
           Create <AiOutlinePlusCircle size={20} />
         </button>
       </form>

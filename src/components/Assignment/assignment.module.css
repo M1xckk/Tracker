@@ -11,7 +11,7 @@
 }
 
 .assignment p {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 19px;
   color: #f2f2f2;
   margin-right: auto;
@@ -45,5 +45,5 @@ p.textCompleted {
 .deleteButton {
   background: none;
   border: none;
-  color: #808080;
+  color: #da0a0a;
 }

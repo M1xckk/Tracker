@@ -1,4 +1,3 @@
-// components/Assignments/index.tsx
 import { Assignment } from "../Assignment";
 import styles from "./assignments.module.css";
 

@@ -6,9 +6,9 @@ export function Assignments({
   deleteAssignment,
   toggleCompleted,
 }: {
-  assignments: { title: string; completed: boolean }[];
-  deleteAssignment: (index: number) => void;
-  toggleCompleted: (index: number) => void;
+  assignments: { id: number; title: string; completed: boolean }[];
+  deleteAssignment: (id: number) => void;
+  toggleCompleted: (id: number) => void;
 }) {
   return (
     <section className={styles.assignments}>
@@ -20,18 +20,21 @@ export function Assignments({
 
         <div>
           <p className={styles.textPurple}>Completed Assignments</p>
-          <span>{assignments.filter((a) => a.completed).length} of {assignments.length}</span>
+          <span>
+            {assignments.filter((a) => a.completed).length} of {assignments.length}
+          </span>
         </div>
       </header>
 
       <div className={styles.list}>
-        {assignments.map((assignment, index) => (
+        {assignments.map((assignment) => (
           <Assignment
-            key={index}
+            key={assignment.id}
+            id={assignment.id}
             title={assignment.title}
             completed={assignment.completed}
-            onDelete={() => deleteAssignment(index)}
-            onToggleCompleted={() => toggleCompleted(index)}
+            onDelete={() => deleteAssignment(assignment.id)} 
+            onToggleCompleted={() => toggleCompleted(assignment.id)} 
           />
         ))}
       </div>

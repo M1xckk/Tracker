@@ -3,6 +3,7 @@ import { Assignments } from "./components/Assignments";
 import { useState } from "react";
 
 interface Assignment {
+  id: number;
   title: string;
   completed: boolean;
 }
@@ -11,18 +12,18 @@ function App() {
   const [assignments, setAssignments] = useState<Assignment[]>([]);
 
   const addAssignment = (title: string) => {
-    const newAssignment = { title, completed: false };
+    const newAssignment = { id: Date.now(), title, completed: false }; 
     setAssignments([...assignments, newAssignment]);
   };
 
-  const deleteAssignment = (index: number) => {
-    const updatedAssignments = assignments.filter((_, i) => i !== index);
+  const deleteAssignment = (id: number) => {
+    const updatedAssignments = assignments.filter(assignment => assignment.id !== id);
     setAssignments(updatedAssignments);
   };
 
-  const toggleCompleted = (index: number) => {
-    const updatedAssignments = assignments.map((assignment, i) =>
-      i === index ? { ...assignment, completed: !assignment.completed } : assignment
+  const toggleCompleted = (id: number) => {
+    const updatedAssignments = assignments.map(assignment =>
+      assignment.id === id ? { ...assignment, completed: !assignment.completed } : assignment
     );
     setAssignments(updatedAssignments);
   };
